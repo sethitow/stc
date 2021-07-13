@@ -1,0 +1,5 @@
+PROGRAM emptyprogram
+  VAR
+  END_VAR
+
+END_PROGRAM;
