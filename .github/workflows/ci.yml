@@ -23,7 +23,7 @@ jobs:
           cmake -GNinja ./..
           ninja
           
-      - name: Build
+      - name: Smoke Test
         run: |
           cd build
           ./stc
