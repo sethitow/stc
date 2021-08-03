@@ -1,21 +1,18 @@
 #include "parse.hpp"
 
 #include <fstream>
-#include <iostream>
+#include <sstream>
+
+#include "lexer.h"
 
 int parse(std::string filename)
 {
-    std::cout << "Parsing " << filename << std::endl;
-
-    std::string oneLine;
     std::ifstream inFile(filename);
+    std::stringstream strFile;
+    strFile << inFile.rdbuf();
 
-    while (inFile)
-    {
-        getline(inFile, oneLine);
-        std::cout << oneLine << std::endl;
-    }
-    inFile.close();
+    tokenizerFunc(strFile.str());
+    display();
 
     return EXIT_SUCCESS;
 }
