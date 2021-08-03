@@ -16,6 +16,9 @@ jobs:
       - name: Get latest CMake and ninja
         uses: lukka/get-cmake@latest 
 
+      - name: Install Dependencies
+        run: sudo apt-get install libboost-all-dev
+
       - name: Build
         run: |
           mkdir build
