@@ -1,6 +1,8 @@
 #ifndef PARSE_HPP
 #define PARSE_HPP
 
-int parse();
+#include <string>
 
-#endif 
+int parse(std::string filename);
+
+#endif
