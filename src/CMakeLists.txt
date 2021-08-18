@@ -1,3 +1,5 @@
+add_definitions( -DPROJECT_VERSION="${CMAKE_PROJECT_VERSION}" )
+
 add_library(libstc parse.cpp
                    compile.cpp
                    lexer.cpp

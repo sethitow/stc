@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     }
     else if (vm.count("version"))
     {
-        std::cout << "Current version: 0.1" << '\n';
+        std::cout << PROJECT_VERSION << '\n';
     }
     else if (vm.count("build"))
     {
