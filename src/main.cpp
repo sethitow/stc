@@ -16,13 +16,11 @@ int main(int argc, char *argv[])
         desc.add_options()
             ("help,h", "List of available commands")
             ("version", "Current version")
-            ("build", "Build and run the program");
+            ("build", po::value<std::string>(), "Build and run the program");
 
         // Get the input from the command line and store it in a variable map
         po::variables_map vm;
-        po::store(parse_command_line(argc, argv, desc), vm);
         po::notify(vm);
-
         
         // Output based on command
         if (vm.count("help")) {
@@ -32,15 +30,14 @@ int main(int argc, char *argv[])
             std::cout << "Current version: 0.1" << '\n';
         }
         else if (vm.count("build")) {
-            parse();
+            parse(vm["build"].as<std::string>());
             compile();
-            std::cout << "And this is where I would put my build functions..." << '\n';
         }
     }
-
+    
     catch(...) {
         std::cerr << "Exception of unknown type!\n";
     }
-
+    
     return EXIT_SUCCESS;
 };
