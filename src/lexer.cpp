@@ -7,14 +7,12 @@
 
 #include "lexer.h"
 
-
-//using namespace std; std::
-
 //VARIABLES
 std::vector<std::string> all_types = {"PROGRAM", "VAR", "END_VAR", "END_PROGRAM", "BOOL", "TRUE", "FALSE"}; //keywords
 std::vector<std::string> operators = {"<", ">", "+", "-", "%", ":="}; // operators
 std::vector<std::string> all_sc = {"{", "}", "[", "]", ";", ":"}; // special characters
 std::vector<Token> fin_tokens;
+
 void display(){
     for(int i = 0; i < fin_tokens.size(); i++){
         fin_tokens[i].print();

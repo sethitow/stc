@@ -18,5 +18,4 @@ struct Token{
     private:
         std::string key,value;
 };
-// std::vector<Token> fin_tokens;
 #endif /* TOKEN_H */
