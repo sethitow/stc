@@ -1,8 +1,6 @@
 #include <algorithm>
 #include <iostream>
 #include <iterator>
-#include <iostream>
-#include <iterator>
 
 #include <boost/program_options.hpp>
 

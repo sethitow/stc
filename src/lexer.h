@@ -5,7 +5,7 @@
 
 #include "token.h"
 
-void tokenizerFunc (std::string sample_input); // main lexer function
-void display();
+std::vector<Token> tokenize(std::string input); // main lexer function
+void display(std::vector<Token>);
 
 #endif

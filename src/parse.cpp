@@ -11,8 +11,8 @@ int parse(std::string filename)
     std::stringstream strFile;
     strFile << inFile.rdbuf();
 
-    tokenizerFunc(strFile.str());
-    display();
+    auto tokens = tokenize(strFile.str());
+    display(tokens);
 
     return EXIT_SUCCESS;
 }
