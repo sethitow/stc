@@ -78,6 +78,12 @@ TokenStream tokenize(std::string fileInput)
             i++;
             continue;
         }
+        if (curr_char == '=' and fileInput[i + 1] == '>')
+        {
+            output_tokens.push((Token){"OPERATOR", "=>"});
+            i++;
+            continue;
+        }
 
         // Special characters (scoping, subscripting, etc)
         if (curr_char == '{')
