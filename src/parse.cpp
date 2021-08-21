@@ -12,7 +12,6 @@ int parse(std::string filename)
     strFile << inFile.rdbuf();
 
     auto tokens = tokenize(strFile.str());
-    display(tokens);
 
     return EXIT_SUCCESS;
 }

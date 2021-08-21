@@ -8,25 +8,13 @@
 #include "lexer.h"
 #include "token.h"
 
-//VARIABLES
-const std::vector<std::string> keywords = {"PROGRAM", "VAR", "END_VAR", "END_PROGRAM", "BOOL", "TRUE", "FALSE"}; //keywords
+const std::vector<std::string> keywords = {"PROGRAM", "VAR", "END_VAR", "END_PROGRAM", "BOOL", "TRUE", "FALSE"}; // keywords
 const std::vector<std::string> operators = {"<", ">", "+", "-", "%", ":="};                                      // operators
 const std::vector<std::string> special_characters = {"{", "}", "[", "]", ";", ":"};                              // special characters
 
-void display(std::vector<Token> tokens)
+TokenStream tokenize(std::string fileInput)
 {
-    for (const auto &token : tokens)
-    {
-        token.print();
-    }
-}
-
-std::vector<Token> tokenize(std::string fileInput)
-{
-    std::vector<Token> output_tokens;
-
-    // Will correct this to consider comments
-    std::replace(fileInput.begin(), fileInput.end(), '\n', ' '); // find newlines & replace with space
+    TokenStream output_tokens;
 
     // Iterate through string & begin identifiying tokens
     for (int i = 0; i < fileInput.length(); i++)
@@ -40,11 +28,39 @@ std::vector<Token> tokenize(std::string fileInput)
         {
             continue;
         }
-        else if (isalpha(curr_char))
+
+        // Single line comments
+        if (curr_char == '/' and fileInput[i + 1] == '/')
+        {
+            auto idx = fileInput.find("\n", i);
+            if (idx != std::string::npos)
+            {
+                auto cmnt = fileInput.substr(i, idx - i);
+                output_tokens.push(Token{"COMMENT_SINGLE_LINE", cmnt});
+                i = idx;
+                continue;
+            }
+        }
+
+        // Multiline comments
+        // TODO: support nested comments
+        if (curr_char == '(' and fileInput[i + 1] == '*')
+        {
+            auto idx = fileInput.find("*)", i);
+            if (idx != std::string::npos)
+            {
+                auto cmnt = fileInput.substr(i, idx - i + 2);
+                output_tokens.push(Token{"COMMENT_MULTI_LINE", cmnt});
+                i = idx + 1;
+                continue;
+            }
+        }
+
+        if (isalpha(curr_char))
         {
             //VARIABLES
             std::string lastChar = "";
-            int position = fileInput.find(" ", i); // returns index
+            int position = fileInput.find_first_of(" \r\n", i); // returns index
 
             curr_word = fileInput.substr(i, position - i); //Creates string from current index to next space found
             curr_word_len = curr_word.length();
@@ -61,28 +77,28 @@ std::vector<Token> tokenize(std::string fileInput)
             // check if the current word is a keyword or not
             if (find(keywords.begin(), keywords.end(), curr_word) != keywords.end())
             {
-                output_tokens.push_back((Token){"KEYWORD", curr_word});
+                output_tokens.push((Token){"KEYWORD", curr_word});
             }
             else
             {
-                output_tokens.push_back((Token){"IDENTIFIER", curr_word});
+                output_tokens.push((Token){"IDENTIFIER", curr_word});
             }
             if (!(lastChar.empty()))
             {
                 if (lastChar == "{") // Identify specific character & create object
-                    output_tokens.push_back((Token){"Left Brace", lastChar});
+                    output_tokens.push((Token){"Left Brace", lastChar});
                 else if (lastChar == "}")
-                    output_tokens.push_back((Token){"Right Brace", lastChar});
+                    output_tokens.push((Token){"Right Brace", lastChar});
                 else if (lastChar == "[")
-                    output_tokens.push_back((Token){"Left Bracket", lastChar});
+                    output_tokens.push((Token){"Left Bracket", lastChar});
                 else if (lastChar == "]")
-                    output_tokens.push_back((Token){"Right Bracket", lastChar});
+                    output_tokens.push((Token){"Right Bracket", lastChar});
                 else if (lastChar == ";")
-                    output_tokens.push_back((Token){"Semi Colon", lastChar});
+                    output_tokens.push((Token){"Semi Colon", lastChar});
                 else if (lastChar == ":")
-                    output_tokens.push_back((Token){"Colon", lastChar});
+                    output_tokens.push((Token){"Colon", lastChar});
                 else
-                    output_tokens.push_back((Token){"SPECIAL_CHARACTER", lastChar});
+                    output_tokens.push((Token){"SPECIAL_CHARACTER", lastChar});
             }
             i += curr_word_len - 1; // begin next iteration at last index of current word
         }
@@ -92,31 +108,31 @@ std::vector<Token> tokenize(std::string fileInput)
             curr_word = fileInput.substr(i, position2 - i);
 
             if (curr_word == "<") // Identify specific character & create object
-                output_tokens.push_back((Token){"Less than", curr_word});
+                output_tokens.push((Token){"Less than", curr_word});
             else if (curr_word == ">")
-                output_tokens.push_back((Token){"Greater then", curr_word});
+                output_tokens.push((Token){"Greater then", curr_word});
             else if (curr_word == "+")
-                output_tokens.push_back((Token){"Add", curr_word});
+                output_tokens.push((Token){"Add", curr_word});
             else if (curr_word == "-")
-                output_tokens.push_back((Token){"Subtract", curr_word});
+                output_tokens.push((Token){"Subtract", curr_word});
             else if (curr_word == "%")
-                output_tokens.push_back((Token){"Modulo", curr_word});
+                output_tokens.push((Token){"Modulo", curr_word});
             else if (curr_word == ":=")
-                output_tokens.push_back((Token){"Assignment ", curr_word});
+                output_tokens.push((Token){"Assignment ", curr_word});
             else if (curr_word == "{")
-                output_tokens.push_back((Token){"Left Brace", curr_word});
+                output_tokens.push((Token){"Left Brace", curr_word});
             else if (curr_word == "}")
-                output_tokens.push_back((Token){"Right Brace", curr_word});
+                output_tokens.push((Token){"Right Brace", curr_word});
             else if (curr_word == "[")
-                output_tokens.push_back((Token){"Left Bracket", curr_word});
+                output_tokens.push((Token){"Left Bracket", curr_word});
             else if (curr_word == "]")
-                output_tokens.push_back((Token){"Right Bracket", curr_word});
+                output_tokens.push((Token){"Right Bracket", curr_word});
             else if (curr_word == ";")
-                output_tokens.push_back((Token){"Semi Colon", curr_word});
+                output_tokens.push((Token){"Semi Colon", curr_word});
             else if (curr_word == ":")
-                output_tokens.push_back((Token){"Colon", curr_word});
+                output_tokens.push((Token){"Colon", curr_word});
             else
-                output_tokens.push_back((Token){"OPERATOR", curr_word});
+                output_tokens.push((Token){"OPERATOR", curr_word});
             i += curr_word.length() - 1; // begin next iteration at last index of current word
         }
     }

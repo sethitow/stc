@@ -13,6 +13,7 @@ struct Token
 
     std::string getkey() const { return key; }
     std::string getvalue() const { return value; }
+    std::string getvalueprintable() const;
 
   private:
     std::string key, value;

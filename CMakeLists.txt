@@ -7,6 +7,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.70 REQUIRED COMPONENTS program_options)
-add_executable(stc src/main.cpp src/parse.cpp src/compile.cpp src/lexer.cpp src/token.cpp)
+
+add_executable(stc src/main.cpp
+                   src/parse.cpp
+                   src/compile.cpp
+                   src/lexer.cpp
+                   src/token.cpp
+                   src/token_stream.cpp)
+
 target_link_libraries(stc Boost::program_options)
 
