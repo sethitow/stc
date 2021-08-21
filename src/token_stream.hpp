@@ -1,6 +1,6 @@
 #include <vector>
 
-#include "token.h"
+#include "token.hpp"
 
 class TokenStream
 {

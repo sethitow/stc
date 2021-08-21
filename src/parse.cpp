@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 
-#include "lexer.h"
+#include "lexer.hpp"
 
 int parse(std::string filename)
 {

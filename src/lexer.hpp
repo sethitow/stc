@@ -3,8 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "token.h"
-
+#include "token.hpp"
 #include "token_stream.hpp"
 
 TokenStream tokenize(std::string input); // main lexer function

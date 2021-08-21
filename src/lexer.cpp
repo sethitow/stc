@@ -5,8 +5,8 @@
 #include <string>
 #include <vector>
 
-#include "lexer.h"
-#include "token.h"
+#include "lexer.hpp"
+#include "token.hpp"
 
 const std::vector<std::string> keywords = {"PROGRAM", "VAR", "END_VAR", "END_PROGRAM", "BOOL", "TRUE", "FALSE"}; // keywords
 const std::vector<std::string> operators = {"<", ">", "+", "-", "%", ":="};                                      // operators
