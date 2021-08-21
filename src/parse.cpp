@@ -7,11 +7,22 @@
 
 int parse(std::string filename)
 {
-    std::ifstream inFile(filename);
+
     std::stringstream strFile;
-    strFile << inFile.rdbuf();
+    {
+        std::ifstream inFile(filename);
+        strFile << inFile.rdbuf();
+    }
 
     auto tokens = tokenize(strFile.str());
+
+    {
+        std::ofstream outFile(filename + ".tok");
+        for (const auto &tok : tokens.to_vec())
+        {
+            outFile << tok.to_string() << "\n";
+        }
+    }
 
     return EXIT_SUCCESS;
 }
