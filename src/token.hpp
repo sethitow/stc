@@ -7,7 +7,8 @@
 struct Token
 {
   public:
-    Token(std::string key = "", std::string value = "");
+    Token(std::string key, std::string value)
+        : key(key), value(value){};
     std::string to_string() const;
     void print() const;
 

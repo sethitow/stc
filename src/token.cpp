@@ -5,12 +5,6 @@
 
 #include <boost/algorithm/string/replace.hpp>
 
-Token::Token(std::string init_key, std::string init_value)
-{
-    key = init_key;
-    value = init_value;
-}
-
 std::string Token::to_string() const
 {
     return getkey() + " " + getvalue();
