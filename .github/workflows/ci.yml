@@ -23,10 +23,15 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -GNinja ./..
+          cmake -GNinja ..
           ninja
+
+      - name: Unit Test
+        run: |
+          cd build/test
+          ctest
           
       - name: Smoke Test
         run: |
-          cd build
+          cd build/src
           ./stc
