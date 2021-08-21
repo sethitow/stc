@@ -7,7 +7,14 @@
 #include "lexer.hpp"
 #include "token.hpp"
 
-const std::vector<std::string> KEYWORDS = {"PROGRAM", "VAR", "END_VAR", "END_PROGRAM", "BOOL", "TRUE", "FALSE"};
+const std::vector<std::string> KEYWORDS = {"PROGRAM", "END_PROGRAM",
+                                           "VAR", "END_VAR",
+                                           "IF", "ELSE", "END_IF",
+                                           "FOR", "TO", "BY", "DO", "END_FOR",
+                                           "CASE", "OF", "END_CASE",
+                                           "REPEAT", "UNTIL", "END_REPEAT",
+                                           "RETURN",
+                                           "BOOL", "TRUE", "FALSE"};
 const auto IDENTIFIER_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_";
 
 TokenStream tokenize(std::string fileInput)
