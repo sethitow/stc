@@ -23,3 +23,8 @@ void Token::print() const
     std::cout << std::left << std::setw(30) << getkey() << std::left
               << std::setw(16) << getvalueprintable() << std::endl;
 }
+
+bool Token::operator==(const Token &other) const
+{
+    return key == other.key and value == other.value;
+}
