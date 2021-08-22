@@ -18,7 +18,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
 
     foreach(test_src ${test_srcs}) 
         add_executable(${test_src} ${test_src})
-        target_link_libraries(${test_src} gtest gmock gtest_main)
+        target_link_libraries(${test_src} libstc gtest gmock gtest_main)
 
         gtest_discover_tests(${test_src})
     endforeach()
