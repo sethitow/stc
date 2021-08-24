@@ -1,6 +1,8 @@
 #ifndef COMPILE_HPP
 #define COMPILE_HPP
 
-int compile();
+#include <string>
+
+int compile(std::string filename);
 
 #endif
