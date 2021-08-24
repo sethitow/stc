@@ -35,8 +35,7 @@ int main(int argc, char *argv[])
     }
     else if (vm.count("build"))
     {
-        parse(vm["build"].as<std::string>());
-        compile();
+        compile(vm["build"].as<std::string>());
     }
 
     return EXIT_SUCCESS;
