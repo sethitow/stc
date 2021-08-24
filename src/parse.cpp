@@ -1,21 +1,28 @@
 #include "parse.hpp"
 
 #include <fstream>
-#include <iostream>
+#include <sstream>
+
+#include "lexer.hpp"
 
 int parse(std::string filename)
 {
-    std::cout << "Parsing " << filename << std::endl;
 
-    std::string oneLine;
-    std::ifstream inFile(filename);
-
-    while (inFile)
+    std::stringstream strFile;
     {
-        getline(inFile, oneLine);
-        std::cout << oneLine << std::endl;
+        std::ifstream inFile(filename);
+        strFile << inFile.rdbuf();
     }
-    inFile.close();
+
+    auto tokens = tokenize(strFile.str());
+
+    {
+        std::ofstream outFile(filename + ".tok");
+        for (const auto &tok : tokens.to_vec())
+        {
+            outFile << tok.to_string() << "\n";
+        }
+    }
 
     return EXIT_SUCCESS;
 }
