@@ -19,7 +19,7 @@ class FunctionAST
 
     bool operator==(const FunctionAST &other) const;
 
-    llvm::Function *codegen();
+    llvm::Function *codegen(CodeGenContext &ctx);
 };
 
 #endif
