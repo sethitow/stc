@@ -9,7 +9,7 @@
 #include "../src/parse.hpp"
 #include "../src/token.hpp"
 
-TEST(Parse, Function)
+TEST(Parse, DISABLED_Function)
 {
     std::vector<Token>
         tok_vec{
@@ -46,8 +46,5 @@ TEST(Parse, Function)
     auto expression = std::make_unique<BinaryExprAST>('+', std::move(lhs), std::move(rhs));
     auto function = std::make_unique<FunctionAST>(std::move(prototype), std::move(expression));
 
-    auto ctx = CodeGenContext("code.st");
-    function->codegen(ctx);
-    ctx.llvm_module->print(llvm::errs(), nullptr);
-    // ASSERT_EQ(function->codegen(), ast->codegen());
+    ASSERT_EQ(*function, *ast);
 };
