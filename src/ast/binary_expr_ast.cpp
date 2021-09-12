@@ -17,11 +17,8 @@ llvm::Value *BinaryExprAST::codegen(CodeGenContext &ctx)
         return ctx.ir_builder->CreateSub(L, R, "subtmp", false, false);
     case '*':
         return ctx.ir_builder->CreateMul(L, R, "multmp", false, false);
-    // case '<':
-    //     L = ctx.ir_builder->CreateFCmpULT(L, R, "cmptmp");
-    //     // Convert bool 0/1 to double 0.0 or 1.0
-    //     return ctx.ir_builder->CreateUIToFP(L, llvm::Type::getDoubleTy(TheContext),
-    //                                 "booltmp");
+    case '<':
+        return ctx.ir_builder->CreateICmpULT(L, R, "cmptmp");
     default:
         return LogErrorV("invalid binary operator");
     }
