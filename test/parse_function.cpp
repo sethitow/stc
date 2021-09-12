@@ -2,9 +2,10 @@
 
 #include <llvm/IR/Module.h>
 
-#include "../src/ast/expr_ast.hpp"
+#include "../src/ast/binary_expr_ast.hpp"
 #include "../src/ast/function_ast.hpp"
 #include "../src/ast/prototype_ast.hpp"
+#include "../src/ast/variable_expr_ast.hpp"
 #include "../src/parse.hpp"
 #include "../src/token.hpp"
 
@@ -45,9 +46,8 @@ TEST(Function, Function)
     auto expression = std::make_unique<BinaryExprAST>('+', std::move(lhs), std::move(rhs));
     auto function = std::make_unique<FunctionAST>(std::move(prototype), std::move(expression));
 
-    InitializeModule();
-    function->codegen();
-    llvm::Module &module = getModule();
-    module.print(llvm::errs(), nullptr);
+    auto ctx = CodeGenContext("code.st");
+    function->codegen(ctx);
+    ctx.llvm_module->print(llvm::errs(), nullptr);
     // ASSERT_EQ(function->codegen(), ast->codegen());
 };
