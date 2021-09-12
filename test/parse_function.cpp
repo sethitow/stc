@@ -9,7 +9,7 @@
 #include "../src/parse.hpp"
 #include "../src/token.hpp"
 
-TEST(Function, Function)
+TEST(Parse, Function)
 {
     std::vector<Token>
         tok_vec{
