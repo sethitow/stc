@@ -68,4 +68,8 @@ class CallExprAST : public ExprAST
     llvm::Value *codegen() override;
 };
 
+// TODO(sitow): get rid of this
+void InitializeModule();
+llvm::Module &getModule();
+
 #endif
