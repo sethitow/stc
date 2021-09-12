@@ -1,12 +1,14 @@
 #include "gtest/gtest.h"
 
+#include <llvm/IR/Module.h>
+
 #include "../src/ast/expr_ast.hpp"
 #include "../src/ast/function_ast.hpp"
 #include "../src/ast/prototype_ast.hpp"
 #include "../src/parse.hpp"
 #include "../src/token.hpp"
 
-TEST(Function, DISABLED_Function)
+TEST(Function, Function)
 {
     std::vector<Token>
         tok_vec{
@@ -43,5 +45,9 @@ TEST(Function, DISABLED_Function)
     auto expression = std::make_unique<BinaryExprAST>('+', std::move(lhs), std::move(rhs));
     auto function = std::make_unique<FunctionAST>(std::move(prototype), std::move(expression));
 
-    ASSERT_EQ(function->codegen(), ast->codegen());
+    InitializeModule();
+    function->codegen();
+    llvm::Module &module = getModule();
+    module.print(llvm::errs(), nullptr);
+    // ASSERT_EQ(function->codegen(), ast->codegen());
 };
