@@ -23,6 +23,8 @@ class PrototypeAST
 
     llvm::Function *codegen(CodeGenContext &ctx);
     const std::string &getName() const { return Name; }
+
+    bool operator==(const PrototypeAST &other) const;
 };
 
 #endif
