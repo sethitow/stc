@@ -21,7 +21,7 @@ class PrototypeAST
     PrototypeAST(const std::string &Name, std::vector<std::string> Args)
         : Name(Name), Args(std::move(Args)) {}
 
-    llvm::Function *codegen();
+    llvm::Function *codegen(CodeGenContext &ctx);
     const std::string &getName() const { return Name; }
 };
 
