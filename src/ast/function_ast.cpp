@@ -40,6 +40,6 @@ llvm::Function *FunctionAST::codegen(CodeGenContext &ctx)
 
 bool FunctionAST::operator==(const FunctionAST &other) const
 {
-    // TODO: implement equality operator for comparison during tests
-    return false;
+    // TODO(sitow): Check function body
+    return Proto == other.Proto;
 }
