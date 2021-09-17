@@ -14,9 +14,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
     FetchContent_MakeAvailable(googletest)
     include(GoogleTest)
     include_directories("${gtest_SOURCE_DIR}/googletest/include") 
-
-    llvm_map_components_to_libnames(llvm_libs core)
-
+    
     foreach(test_src ${test_srcs}) 
         add_executable(${test_src}_test ${test_src})
         target_link_libraries(${test_src}_test ${llvm_libs} libstc gtest gmock gtest_main)
