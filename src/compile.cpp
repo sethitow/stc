@@ -28,5 +28,19 @@ int compile(std::string filename)
 
     auto ast = parse(tokens);
 
+    auto ctx = CodeGenContext(filename);
+    ast->codegen(ctx);
+
+    {
+        std::error_code EC;
+        llvm::raw_fd_ostream ll_dest(filename + ".ll", EC);
+        if (EC)
+        {
+            llvm::errs() << "Could not open file: " << EC.message();
+            return EXIT_FAILURE;
+        }
+        ctx.llvm_module->print(ll_dest, nullptr);
+    }
+
     return EXIT_SUCCESS;
 }
