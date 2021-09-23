@@ -3,8 +3,8 @@
 #include "lexer.hpp"
 
 // TODO: This return type might need to change
-std::unique_ptr<FunctionAST> parse(std::vector<Token> tokens)
+unique_ptr<FunctionAST> parse(TokenStream stream)
 {
-    // TODO: Implement parsing
+    stream.next();
     return nullptr;
 }

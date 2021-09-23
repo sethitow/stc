@@ -13,3 +13,8 @@ void TokenStream::print()
         token.print();
     }
 }
+
+Token TokenStream::next()
+{
+    return tokens[index++];
+}
