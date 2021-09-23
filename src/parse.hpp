@@ -5,6 +5,6 @@
 #include "token.hpp"
 #include "token_stream.hpp"
 
-std::unique_ptr<FunctionAST> parse(TokenStream);
+std::unique_ptr<FunctionAST> parse(TokenStream &);
 
 #endif
