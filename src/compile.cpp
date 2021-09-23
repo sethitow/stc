@@ -26,7 +26,7 @@ int compile(std::string filename)
         }
     }
 
-    auto ast = parse(tokens.to_vec());
+    auto ast = parse(tokens);
 
     return EXIT_SUCCESS;
 }

@@ -37,7 +37,13 @@ TEST(Parse, DISABLED_Function)
             Token("SPECIAL_CHARACTER", ";"),
         };
 
-    auto ast = parse(tok_vec);
+    TokenStream stream;
+    for (auto const &tok : tok_vec)
+    {
+        stream.push(tok);
+    }
+
+    auto ast = parse(stream);
 
     std::vector<std::string> arg_names = {"x", "y"};
     auto prototype = std::make_unique<PrototypeAST>("F_Sample", std::move(arg_names));
