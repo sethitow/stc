@@ -54,3 +54,27 @@ TEST(Parse, DISABLED_Function)
 
     ASSERT_EQ(*function, *ast);
 };
+
+TEST(Parse, Function_no_Arguments)
+{
+    std::vector<Token>
+        tok_vec{
+            Token("KEYWORD", "FUNCTION"),
+            Token("IDENTIFIER", "F_Sample"),
+            Token("KEYWORD", "END_FUNCTION"),
+            Token("SPECIAL_CHARACTER", ";"),
+        };
+
+    TokenStream stream;
+    for (auto const &tok : tok_vec)
+    {
+        stream.push(tok);
+    }
+
+    auto ast = parse(stream);
+
+    std::vector<std::string> arg_names = {};
+    auto prototype = std::make_unique<PrototypeAST>("F_Sample", std::move(arg_names));
+    auto function = std::make_unique<FunctionAST>(std::move(prototype), nullptr);
+    ASSERT_EQ(*function, *ast);
+};
