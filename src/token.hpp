@@ -1,7 +1,6 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 #include <string>
-#include <vector>
 
 // where/how the keywords are going to be saved
 struct Token
