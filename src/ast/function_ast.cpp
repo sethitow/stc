@@ -41,5 +41,5 @@ llvm::Function *FunctionAST::codegen(CodeGenContext &ctx)
 bool FunctionAST::operator==(const FunctionAST &other) const
 {
     // TODO(sitow): Check function body
-    return Proto == other.Proto;
+    return *Proto == *other.Proto;
 }
