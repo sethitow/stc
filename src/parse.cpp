@@ -1,7 +1,10 @@
 #include "parse.hpp"
-#include "lexer.hpp"
+
 #include <iostream>
 #include <stdexcept>
+
+#include "ast/number_expr_ast.hpp"
+#include "lexer.hpp"
 
 std::unique_ptr<FunctionAST> parseFunction(TokenStream &stream);
 std::vector<std::string> parseVarInput(TokenStream &stream);
@@ -39,7 +42,8 @@ std::unique_ptr<FunctionAST> parseFunction(TokenStream &stream)
     }
 
     auto prototype = std::make_unique<PrototypeAST>(functionName, std::vector<std::string>());
-    auto function = std::make_unique<FunctionAST>(std::move(prototype), nullptr);
+    auto body = std::make_unique<NumberExprAST>(0);
+    auto function = std::make_unique<FunctionAST>(std::move(prototype), std::move(body));
 
     return function;
 }
