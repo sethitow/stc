@@ -38,7 +38,7 @@ TEST(Parse, DISABLED_Function)
         };
 
     TokenStream stream;
-    for (auto const &tok : tok_vec)
+    for (const auto &tok : tok_vec)
     {
         stream.push(tok);
     }
@@ -66,7 +66,7 @@ TEST(Parse, Function_no_Arguments)
         };
 
     TokenStream stream;
-    for (auto const &tok : tok_vec)
+    for (const auto &tok : tok_vec)
     {
         stream.push(tok);
     }
