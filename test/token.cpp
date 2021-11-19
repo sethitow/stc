@@ -12,14 +12,14 @@ TEST(PrintableValue, CarriageReturn)
 {
     Token tok_cr("return", "\r");
 
-    EXPECT_EQ(tok_cr.getvalueprintable(), R"(\r)");
+    EXPECT_EQ(tok_cr.value_printable(), R"(\r)");
 };
 
 TEST(PrintableValue, LineFeed)
 {
     Token tok_lf("newline", "\n");
 
-    EXPECT_EQ(tok_lf.getvalueprintable(), R"(\n)");
+    EXPECT_EQ(tok_lf.value_printable(), R"(\n)");
 };
 
 TEST(EQOperator, DifferentKeys)

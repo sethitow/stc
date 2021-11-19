@@ -12,33 +12,33 @@ std::vector<std::string> parseVarInput(TokenStream &stream);
 std::unique_ptr<FunctionAST> parse(TokenStream &stream)
 {
     auto tok = stream.next();
-    if (tok.getkey() == "KEYWORD" && tok.getvalue() == "FUNCTION")
+    if (tok.key() == "KEYWORD" && tok.value() == "FUNCTION")
     {
         std::cerr << "Parsing function..." << std::endl;
         return parseFunction(stream);
     }
-    throw std::invalid_argument("Expected keyword FUNCTION, but got " + tok.getkey() + " " + tok.getvalue() + " instead");
+    throw std::invalid_argument("Expected keyword FUNCTION, but got " + tok.key() + " " + tok.value() + " instead");
 }
 
 std::unique_ptr<FunctionAST> parseFunction(TokenStream &stream)
 {
     auto tok = stream.next();
-    if (tok.getkey() != "IDENTIFIER")
+    if (tok.key() != "IDENTIFIER")
     {
-        throw std::invalid_argument("Expected function name identifier, but got token " + tok.getkey() + " instead");
+        throw std::invalid_argument("Expected function name identifier, but got token " + tok.key() + " instead");
     }
-    auto functionName = tok.getvalue();
+    auto functionName = tok.value();
 
     tok = stream.next();
-    if (tok.getkey() != "KEYWORD" || tok.getvalue() != "END_FUNCTION")
+    if (tok.key() != "KEYWORD" || tok.value() != "END_FUNCTION")
     {
-        throw std::invalid_argument("Expected keyword END_FUNCTION but got " + tok.getkey() + " " + tok.getvalue() + " instead");
+        throw std::invalid_argument("Expected keyword END_FUNCTION but got " + tok.key() + " " + tok.value() + " instead");
     }
 
     tok = stream.next();
-    if (tok.getkey() != "SPECIAL_CHARACTER" || tok.getvalue() != ";")
+    if (tok.key() != "SPECIAL_CHARACTER" || tok.value() != ";")
     {
-        throw std::invalid_argument("Expected special character ; but got " + tok.getkey() + " " + tok.getvalue() + " instead");
+        throw std::invalid_argument("Expected special character ; but got " + tok.key() + " " + tok.value() + " instead");
     }
 
     auto prototype = std::make_unique<PrototypeAST>(functionName, std::vector<std::string>());

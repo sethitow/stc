@@ -7,12 +7,12 @@
 
 std::string Token::to_string() const
 {
-    return getkey() + " " + getvalue();
+    return key() + " " + value();
 }
 
-std::string Token::getvalueprintable() const
+std::string Token::value_printable() const
 {
-    auto v = getvalue();
+    auto v = value();
     boost::replace_all(v, "\r", R"(\r)");
     boost::replace_all(v, "\n", R"(\n)");
     return v;
@@ -20,11 +20,11 @@ std::string Token::getvalueprintable() const
 
 void Token::print() const
 {
-    std::cout << std::left << std::setw(30) << getkey() << std::left
-              << std::setw(16) << getvalueprintable() << std::endl;
+    std::cout << std::left << std::setw(30) << key() << std::left
+              << std::setw(16) << value_printable() << std::endl;
 }
 
 bool Token::operator==(const Token &other) const
 {
-    return key == other.key and value == other.value;
+    return _key == other._key and _value == other._value;
 }
