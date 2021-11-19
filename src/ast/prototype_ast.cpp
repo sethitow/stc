@@ -20,5 +20,5 @@ llvm::Function *PrototypeAST::codegen(CodeGenContext &ctx)
 
 bool PrototypeAST::operator==(const PrototypeAST &other) const
 {
-    return Name == other.Name && Args == other.Args;
+    return Name == other.Name && Args == other.Args && return_type == other.return_type;
 }

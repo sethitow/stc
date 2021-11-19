@@ -1,5 +1,4 @@
-#ifndef PROTOTYPEAST_H
-#define PROTOTYPEAST_H
+#pragma once
 
 #include <memory>
 #include <string>
@@ -16,15 +15,14 @@ class PrototypeAST
 {
     std::string Name;
     std::vector<std::string> Args;
+    std::string return_type;
 
   public:
-    PrototypeAST(const std::string &Name, std::vector<std::string> Args)
-        : Name(Name), Args(std::move(Args)) {}
+    PrototypeAST(const std::string &Name, std::vector<std::string> Args, const std::string &return_type)
+        : Name(Name), Args(std::move(Args)), return_type(return_type) {}
 
     llvm::Function *codegen(CodeGenContext &ctx);
     const std::string &getName() const { return Name; }
 
     bool operator==(const PrototypeAST &other) const;
 };
-
-#endif

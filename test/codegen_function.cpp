@@ -10,7 +10,7 @@
 TEST(CodeGen, Function)
 {
     std::vector<std::string> arg_names = {"x", "y"};
-    auto prototype = std::make_unique<PrototypeAST>("F_Sample", std::move(arg_names));
+    auto prototype = std::make_unique<PrototypeAST>("F_Sample", std::move(arg_names), "");
     auto lhs = std::make_unique<VariableExprAST>("x");
     auto rhs = std::make_unique<VariableExprAST>("y");
     auto expression = std::make_unique<BinaryExprAST>('+', std::move(lhs), std::move(rhs));
