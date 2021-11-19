@@ -28,3 +28,8 @@ bool Token::operator==(const Token &other) const
 {
     return _key == other._key and _value == other._value;
 }
+
+bool Token::operator!=(const Token &other) const
+{
+    return !(*this == other);
+}

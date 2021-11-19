@@ -16,6 +16,7 @@ struct Token
     std::string value_printable() const;
 
     bool operator==(const Token &other) const;
+    bool operator!=(const Token &other) const;
 
   private:
     std::string _key, _value;

@@ -41,3 +41,23 @@ TEST(EQOperator, DifferentValues)
     EXPECT_EQ(tok1, tok2);
     EXPECT_FALSE(tok1 == tok3);
 };
+
+TEST(NEQOperator, DifferentKeys)
+{
+    Token tok1("KEY1", "VAL1");
+    Token tok2("KEY1", "VAL1");
+    Token tok3("KEY2", "VAL1");
+
+    EXPECT_NE(tok1, tok3);
+    EXPECT_FALSE(tok1 != tok2);
+};
+
+TEST(NEQOperator, DifferentValues)
+{
+    Token tok1("KEY1", "VAL1");
+    Token tok2("KEY1", "VAL1");
+    Token tok3("KEY1", "VAL2");
+
+    EXPECT_NE(tok1, tok3);
+    EXPECT_FALSE(tok1 != tok2);
+};
